@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Form Đăng Ký</h2>
+
+<form id="myForm">
+  Họ tên: <input type="text" id="name" name="name"><br><br>
+  Số điện thoại: <input type="text" id="phone" name="phone"><br><br>
+  Email: <input type="text" id="email" name="email"><br><br>
+  Mật khẩu: <input type="password" id="password" name="password"><br><br>
+  Xác nhận mật khẩu: <input type="password" id="confirm_password" name="confirm_password"><br><br>
+  <input type="submit" value="Đăng ký">
+</form>
+
+<script>
+document.getElementById("myForm").addEventListener("submit", function(event){
+  event.preventDefault();
+  
+  var name = document.getElementById("name").value;
+  var phone = document.getElementById("phone").value;
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  var confirm_password = document.getElementById("confirm_password").value;
+  
+  var errors = [];
+  
+  if(name == ""){
+    errors.push("Họ tên không được bỏ trống");
+  }
+  
+  if(phone.length != 10 || isNaN(phone)){
+    errors.push("Số điện thoại phải có 10 kí tự và không chứa kí tự không phải số");
+  }
+  
+  if(email.indexOf("@") == -1 || email.indexOf(".") == -1 || email.indexOf(".") < email.indexOf("@") || email.indexOf(".") == 0){
+    errors.push("Email không hợp lệ");
+  }
+  
+  if(!password.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$/)){
+    errors.push("Mật khẩu phải có ít nhất 8 kí tự, bao gồm cả chữ và số, và phải có ít nhất một kí tự viết hoa");
+  }
+  
+  if(password != confirm_password){
+    errors.push("Xác nhận mật khẩu không khớp với mật khẩu");
+  }
+  
+  if(errors.length > 0){
+    alert(errors.join("\n"));
+    return false;
+  }
+  
+  alert("Đăng ký thành công!");
+});
+
+</script>
+
+</body>
+</html>
