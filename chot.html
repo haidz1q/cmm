@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .slide-container{
+            max-width: 500px;
+            position: relative;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <img class="slide" src="anh1.png" style="width: 100%;">
+        <img class="slide" src="anh2.jpg" style="width: 100%;">
+        <img class="slide" src="anh3.jpg" style="width: 100%;">
+        <img class="slide" src="anh4.png" style="width: 100%;">
+        <img class="slide" src="anh5.jpg" style="width: 100%;">
+
+        <button class="prev" onclick="changeSlide(-1)">Prev</button>
+        <button class="next" onclick="changeSlide(1)">Next</button>
+        <button onclick="startSlide()">Start</button>
+        <button onclick="stopSlide()">Stop</button>
+        <button onclick="goToSlide(1)">1</button>
+        <button onclick="goToSlide(2)">2</button>
+        <button onclick="goToSlide(3)">3</button>
+        <button onclick="goToSlide(4)">4</button>
+        <button onclick="goToSlide(5)">5</button>
+    </div>
+    <script>
+        var slideIndex = 0
+        var slides = document.getElementsByClassName("slide")
+        var prevButton = document.getElementsByClassName("prev")[0]
+        var nextButton = document.getElementsByClassName("next")[0]
+        var interval
+        
+         function showSlide(n){
+            for(var i = 0; i < slides.length; i++){
+                slides[i].style.display = "none"
+            }
+            slides[n].style.display = "block"
+            prevButton.style.display = n == 0 ? "none" : "inline-block"
+            nextButton.style.display = n == slides.length - 1 ? "none" : "inline-block"
+          
+
+         }
+         function changeSlide(n){
+            slideIndex += n
+            if(slideIndex < 0){
+                slideIndex = slides.length -1
+            } else if(slideIndex > slides.length - 1){
+                slideIndex = 0
+            }
+            showSlide(slideIndex)
+         }
+         function startSlide(){
+            interval = setInterval(function() {changeSlide(1);},1500)
+         }
+         function stopSlide(){
+            clearInterval(interval)
+         }
+         function goToSlide(n){
+        slideIndex = n -1
+        showSlide(slideIndex)
+         }
+         showSlide(slideIndex)
+    </script>
+    
+</body>
+</html>
