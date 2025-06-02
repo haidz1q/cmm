@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            justify-items: center;
+            column-gap: 1px;
+        }
+        .product {
+            width: 200px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+        }
+        .product p {
+            margin: 0;
+            color: black;
+            text-align: center;
+        }
+        .product .price {
+            color: red;
+        }
+        .product .buy-now {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="product-container" class="product-container">
+    </div>
+
+    <script type="text/javascript">
+        var products = [
+            {img: "https://laptopaz.vn/media/product/250_2928_2912_q410va.jpg", text: "Asus Zenbook 14X OLED", price: "15.190.000VND"},
+            {img: "https://laptopaz.vn/media/product/250_2928_2912_q410va.jpg", text: "Asus Zenbook 14X OLED", price: "15.190.000VND"},
+            {img: "https://laptopaz.vn/media/product/250_2928_2912_q410va.jpg", text: "Asus Zenbook 14X OLED", price: "15.190.000VND"},
+            {img: "https://laptopaz.vn/media/product/250_2928_2912_q410va.jpg", text: "Asus Zenbook 14X OLED", price: "15.190.000VND"},
+            {img: "https://laptopaz.vn/media/product/250_2935_", text: "DELL Vostro 5630", price: "27.430.000 VND"},
+            {img: "https://laptopaz.vn/media/product/250_2935_", text: "DELL Vostro 5630", price: "27.430.000 VND"},
+            {img: "https://laptopaz.vn/media/product/250_2935_", text: "DELL Vostro 5630", price: "27.430.000 VND"},
+            {img: "https://laptopaz.vn/media/product/250_2935_", text: "DELL Vostro 5630", price: "27.430.000 VND"}
+        ];
+
+        var container = document.getElementById("product-container");
+
+        for (var i = 0; i < products.length; i++) {
+            var productDiv = document.createElement("div");
+            productDiv.className = "product";
+
+            productDiv.onmouseover = function() {
+                this.style.backgroundColor = "#f8f8f8";
+            };
+            productDiv.onmouseout = function() {
+                this.style.backgroundColor = "red";
+            };
+
+            var img = document.createElement("img");
+            img.src = products[i].img;
+
+            var p = document.createElement("p");
+            p.textContent = products[i].text;
+
+            var price = document.createElement("p");
+            price.textContent = products[i].price;
+            price.className = "price";
+
+            var buyNow = document.createElement("div");
+            buyNow.textContent = "MUA NGAY";
+            buyNow.className = "buy-now";
+            buyNow.onclick = function() {
+                var name = prompt("Nhập Họ tên:");
+                var email = prompt("Nhập Email:");
+                var phone = prompt("Nhập Số Điện Thoại:");
+                var address = prompt("Nhập Địa Chỉ:");
+
+                if (!name || !email || !phone || !address) {
+                    console.log("Vui lòng không để trống thông tin.");
+                    return;
+                }
+
+                if (!email.includes("@") || !email.includes(".")) {
+                    console.log("Email không hợp lệ.");
+                    return;
+                }
+
+                if (!phone.startsWith("0") || phone.length != 10) {
+                    console.log("Số Điện Thoại không hợp lệ.");
+                    return;
+                }
+
+                alert("Đặt hàng thành công!");
+            };
+
+            productDiv.appendChild(img);
+            productDiv.appendChild(p);
+            productDiv.appendChild(price);
+            productDiv.appendChild(buyNow);
+
+            container.appendChild(productDiv);
+        }
+    </script>
+</body>
+</html>
